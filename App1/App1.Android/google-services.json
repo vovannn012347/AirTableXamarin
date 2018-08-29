@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "85053548985",
+    "firebase_url": "https://airtablexamarin.firebaseio.com",
+    "project_id": "airtablexamarin",
+    "storage_bucket": "airtablexamarin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:85053548985:android:2fc519ac5ec8506d",
+        "android_client_info": {
+          "package_name": "com.companyname.App1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "85053548985-1lmend2g9ts486k8sniop93gvooagm6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-qGbwq_Q0V6RO2z5LS0duTFhdk-Y3aTQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
