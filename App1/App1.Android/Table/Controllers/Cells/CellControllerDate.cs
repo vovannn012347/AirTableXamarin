@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using App1.Droid.Table.Models.Cells;
 using App1.Droid.Table.Views;
-using App1.Droid.Table.Views.Cells;
 
 namespace App1.Droid.Table.Controllers.Cells
 {
@@ -26,6 +16,17 @@ namespace App1.Droid.Table.Controllers.Cells
             cellViews = new List<ICellViewDate>();
         }
 
+        public void HookView(ICellViewDate cellViewDate)
+        {
+            cellViews.Add(cellViewDate);
+            cellViewDate.SetDateFormat(cellModelDate.GetFormat());
+            cellViewDate.SetData(cellModelDate.Data);
+        }
+        public void UnhookView(ICellViewDate cellViewDate)
+        {
+            cellViews.Remove(cellViewDate);
+        }
+        
         public void NotifyDataChanged(string date)
         {
             foreach (ICellViewDate viw in cellViews)
@@ -33,22 +34,9 @@ namespace App1.Droid.Table.Controllers.Cells
                 viw.SetData(date);
             }
         }
-
         public void UserSetData(string text)
         {
             cellModelDate.Data = text;
-        }
-
-        public void HookView(ICellViewDate cellViewDate)
-        {
-            cellViews.Add(cellViewDate);
-            cellViewDate.SetDateFormat(cellModelDate.GetFormat());
-            cellViewDate.SetData(cellModelDate.Data);
-        }
-
-        public void UnhookView(ICellViewDate cellViewDate)
-        {
-            cellViews.Remove(cellViewDate);
         }
     }
 }

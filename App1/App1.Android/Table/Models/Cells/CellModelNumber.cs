@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+﻿using Android.App;
 using App1.Droid.Table.Controllers.Cells;
 using App1.Droid.Table.Views;
 using App1.Droid.Table.Views.Cells;
@@ -18,12 +8,11 @@ namespace App1.Droid.Table.Models.Cells
 {
     class CellModelNumber : CellModel
     {
-        String number;
+        string number;
         CellControllerNumber controller;
 
-        public CellModelNumber(ColumnModel parent)
+        public CellModelNumber(ColumnModel parent) : base(parent)
         {
-            parentColumn = parent;
             controller = new CellControllerNumber(this);
         }
 
@@ -32,6 +21,11 @@ namespace App1.Droid.Table.Models.Cells
             return new CellViewNumber(context, controller);
         }
 
+        public override void ColumnChangeSetData(string data)
+        {
+            number = data;
+            controller.NotifyDataChanged(number);
+        }
         public override void SetData(DataSnapshot data)
         {
             if (consume_update)
@@ -43,14 +37,13 @@ namespace App1.Droid.Table.Models.Cells
             number = data.Value.ToString();
             controller.NotifyDataChanged(number);
         }
-
-        public override void ColumnChangeSetData(string data)
+        public override void EraseData()
         {
-            number = data;
+            number = "";
             controller.NotifyDataChanged(number);
         }
-
-        public override String Data
+    
+        public override string Data
         {
             get
             {
@@ -61,17 +54,11 @@ namespace App1.Droid.Table.Models.Cells
                 number = value;
                 controller.NotifyDataChanged(number);
                 consume_update = true;
-                if (!System.String.IsNullOrEmpty(value))
+                if (!string.IsNullOrEmpty(value))
                 {
                     Row_Ref.Child(parentColumn.ColumnId).SetValue(value);
                 }
             }
         }
-
-        public override void EraseData()
-        {
-            number = "";
-            controller.NotifyDataChanged(number);
-        }
-    }
+}
 }

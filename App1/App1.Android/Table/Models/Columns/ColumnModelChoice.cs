@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
-using App1.Droid.Table.Controllers;
 using App1.Droid.Table.Models.Cells;
-using App1.Droid.Table.Views;
 using Firebase.Database;
 
 namespace App1.Droid.Table.Models.Columns
@@ -22,42 +14,32 @@ namespace App1.Droid.Table.Models.Columns
 
         private List<string> choices;
             
-        private ArrayAdapter<String> choicesAdapter;
+        private ArrayAdapter<string> choicesAdapter;
         
         public ColumnModelChoice() : base()
         {
-            choices = new List<string>();
-            choices.Add("");
+            choices = new List<string>{""};
             updateListener = new ChoiceUpdate(this);
-            controller = new ColumnController(this);
         }
-
         public ColumnModelChoice(DataSnapshot data) : base(data)
         {
-            choices = new List<string>();
-            choices.Add("");
-            foreach (String value in this.data.Values)
+            choices = new List<string>{""};
+            foreach (string value in this.data.Values)
             {
                 choices.Add(value);
             }
 
             updateListener = new ChoiceUpdate(this);
-            controller = new ColumnController(this);
-            
-
+           
             data.Child("data").Ref.AddChildEventListener(updateListener);
         }
-        
-        public ArrayAdapter<String> getChoicesAdapter(Activity context)
+          
+        public void Dispose()
         {
-            if (choicesAdapter == null)
-            {
-                choicesAdapter = new ArrayAdapter<String>(context, Android.Resource.Layout.SimpleListItem1, choices);
-            }
-            return choicesAdapter;
+            updateListener.Dispose();
         }
-
-        public String IndexOfChoice(String choice)
+        
+        public string IndexOfChoice(string choice)
         {
             if (data.ContainsValue(choice))
             {
@@ -65,8 +47,7 @@ namespace App1.Droid.Table.Models.Columns
             }
             else
             {
-                int temp;
-                if(int.TryParse(choice, out temp) && temp < choices.Count)
+                if (int.TryParse(choice, out int temp) && temp < choices.Count)
                 {
                     return choice;
                 }
@@ -77,29 +58,25 @@ namespace App1.Droid.Table.Models.Columns
             }
         }
 
-        public void Dispose()
-        {
-            updateListener.Dispose();
-        }
-
-        public override CellModel constructCell()
+        public override CellModel ConstructCell()
         {
             return new CellModelChoice(this);
         }
 
-        public override ColumnView GetView(Activity context)
+        public ArrayAdapter<string> GetChoicesAdapter(Activity context)
         {
-            ColumnView cv = new ColumnView(context, controller);
-
-            return cv;
+            if (choicesAdapter == null)
+            {
+                choicesAdapter = new ArrayAdapter<string>(context, Android.Resource.Layout.SimpleListItem1, choices);
+            }
+            return choicesAdapter;
         }
-
-        public List<String> getChoices()
+        public List<string> GetChoices()
         {
             return choices;
         }
 
-        public void setChoices(List<String> choices)
+        public void SetChoices(List<string> choices)
         {
             this.choices = choices;
         }
@@ -135,8 +112,7 @@ namespace App1.Droid.Table.Models.Columns
                     }
                 }
             }
-
-
+            
             public void OnChildChanged(DataSnapshot dataSnapshot, String previousChildName)
             {
                 if (parent.data.ContainsKey(dataSnapshot.Key))
@@ -156,8 +132,7 @@ namespace App1.Droid.Table.Models.Columns
                 }
 
             }
-
-
+            
             public void OnChildRemoved(DataSnapshot dataSnapshot)
             {
                 if (parent.data.ContainsKey(dataSnapshot.Key))

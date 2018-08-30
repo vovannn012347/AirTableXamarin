@@ -90,7 +90,6 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Table\Controllers\CellController.cs" />
     <Compile Include="Table\Controllers\Cells\CellControllerChoice.cs" />
     <Compile Include="Table\Controllers\Cells\CellControllerDate.cs" />
     <Compile Include="Table\Controllers\Cells\CellControllerImage.cs" />
@@ -99,8 +98,8 @@
     <Compile Include="Table\Controllers\ColumnController.cs" />
     <Compile Include="Table\Controllers\RowController.cs" />
     <Compile Include="Table\Controllers\TableController.cs" />
-    <Compile Include="Table\IImageReciever.cs" />
-    <Compile Include="Table\ImageProvider.cs" />
+    <Compile Include="Table\Interfaces\IImageReciever.cs" />
+    <Compile Include="Table\Interfaces\ImageProvider.cs" />
     <Compile Include="Table\Models\CellModel.cs" />
     <Compile Include="Table\Models\Cells\CellModelChoice.cs" />
     <Compile Include="Table\Models\Cells\CellModelDate.cs" />
@@ -115,10 +114,10 @@
     <Compile Include="Table\Models\Columns\ColumnModelText.cs" />
     <Compile Include="Table\Models\RowModel.cs" />
     <Compile Include="Table\Models\TableModel.cs" />
-    <Compile Include="Table\Views\Cells\ICellViewDate.cs" />
-    <Compile Include="Table\Views\Cells\ICellViewImage.cs" />
-    <Compile Include="Table\Views\EditDateDialog.cs" />
-    <Compile Include="Table\Views\IRowView.cs" />
+    <Compile Include="Table\Interfaces\ICellViewDate.cs" />
+    <Compile Include="Table\Interfaces\ICellViewImage.cs" />
+    <Compile Include="Table\Dialogs\EditDateDialog.cs" />
+    <Compile Include="Table\Interfaces\IRowView.cs" />
     <Compile Include="Table\Views\Cells\CellViewChoice.cs" />
     <Compile Include="Table\Views\Cells\CellViewDate.cs" />
     <Compile Include="Table\Views\Cells\CellViewImage.cs" />
@@ -126,8 +125,8 @@
     <Compile Include="Table\Views\Cells\CellViewText.cs" />
     <Compile Include="Table\Views\CellView.cs" />
     <Compile Include="Table\Views\ColumnView.cs" />
-    <Compile Include="Table\Views\EditImageDialog.cs" />
-    <Compile Include="Table\Views\EditRowDialog.cs" />
+    <Compile Include="Table\Dialogs\EditImageDialog.cs" />
+    <Compile Include="Table\Dialogs\EditRowDialog.cs" />
     <Compile Include="Table\Views\TableRowView.cs" />
     <Compile Include="Table\Views\TableView.cs" />
   </ItemGroup>
@@ -167,7 +166,6 @@
     <Folder Include="Resources\drawable-xhdpi\" />
     <Folder Include="Resources\drawable-xxhdpi\" />
     <Folder Include="Resources\drawable-xxxhdpi\" />
-    <Folder Include="Table\Views\Columns\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\App1\App1.csproj">

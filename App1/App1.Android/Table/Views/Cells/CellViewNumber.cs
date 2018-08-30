@@ -1,6 +1,5 @@
 ﻿using System;
 using Android.App;
-using Android.Runtime;
 using Android.Text;
 using Android.Views;
 using Android.Widget;
@@ -28,18 +27,6 @@ namespace App1.Droid.Table.Views.Cells
 
             controller.HookView(this);
         }
-
-        
-        public override void DeleteView()
-        {
-            cell_controller.UnhookView(this);
-        }
-
-        public override View GetView()
-        {
-            return numberView;
-        }
-
         
         public override void SetData(string data)
         {
@@ -61,7 +48,6 @@ namespace App1.Droid.Table.Views.Cells
                 numberView.Text = "";
             }
         }
-
         private void UploadChanges()
         {
             string text = numberView.Text.ToString();
@@ -69,19 +55,24 @@ namespace App1.Droid.Table.Views.Cells
             cell_controller.UserSetData(text);
         }
 
-        
+        public override void DeleteView()
+        {
+            cell_controller.UnhookView(this);
+        }
+        public override View GetView()
+        {
+            return numberView;
+        }
+ 
         public void BeforeTextChanged(ICharSequence s, int start, int count, int after)
         {
 
         }
-
-        
         public void OnTextChanged(ICharSequence s, int start, int before, int count)
         {
             if (timer != null)
                 timer.Cancel();
         }
-
         public void AfterTextChanged(IEditable s)
         {
 
@@ -95,7 +86,6 @@ namespace App1.Droid.Table.Views.Cells
             timer.Schedule(new UploadChangesTimerTask(this), 3000);
         }
 
-        //uhh, so microsoft imported a class and did not supply base class features dependent on language
         class UploadChangesTimerTask : TimerTask
         {
             CellViewNumber caller;

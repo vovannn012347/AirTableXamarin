@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
 using App1.Droid.Table.Controllers;
@@ -21,16 +19,16 @@ namespace App1.Droid.Table.Models
         private List<RowModel> rows;
         private List<ColumnModel> columns;
 
+        private readonly ColumnChangeListener columnListener;
+        private readonly RowDataListener rowDataListener;
+        private readonly RowChangeListener rowListener;
+        private readonly NameChangeListener nameListener;
+
         private DatabaseReference databaseTable;
         private DatabaseReference databaseColumns;
         private DatabaseReference databaseRows;
         private DatabaseReference tableRowData;
         private DatabaseReference tableNameData;
-
-        private ColumnChangeListener columnListener;
-        private RowDataListener rowDataListener;
-        private RowChangeListener rowListener;
-        private NameChangeListener nameListener;
 
         bool consume_name_update;
 
@@ -76,95 +74,12 @@ namespace App1.Droid.Table.Models
             tableRowData.AddValueEventListener(rowDataListener);
         }
 
-        public TableView GetTableView(Activity context)
-        {
-            TableView view = new TableView(context, controller);
-
-            return view;
-        }
-
-        private void AddNewRow()
-        {
-            DatabaseReference newRowRef =
-                    databaseRows.Child(newRowId);
-
-            RowModel newRow = new RowModel(this, newRowRef)
-            {
-                RowId = newRowId
-            };
-
-            rows.Add(newRow);
-            controller.NewRowAdded(newRow);
-        }
-
-        private ColumnModel GetColumnCell(DataSnapshot cell)
-        {
-            String type = cell.Child("type").Value.ToString();
-                switch(type){
-                    case "TEXT":
-                        return new ColumnModelText(cell);
-                    case "NUMBER":
-                        return new ColumnModelNumber(cell);
-                    case "CHOICE":
-                        return new ColumnModelChoice(cell);
-                    case "IMAGE":
-                        return new ColumnModelImage(cell);
-                    case "DATE":
-                        return new ColumnModelDate(cell);
-
-            }
-                return new ColumnModelText();
-        }
-
         public void UnbindListeners()
         {
             databaseColumns.RemoveEventListener(columnListener);
             databaseRows.RemoveEventListener(rowListener);
             tableRowData.RemoveEventListener(rowDataListener);
             tableNameData.RemoveEventListener(nameListener);
-        }
-
-        public void UserCheckedRow(bool check)
-        {
-            controller.UserCheckedRow(check);
-        }
-
-        public void DeleteCheckedRows()
-        {
-            foreach (RowModel r in rows)
-            {
-                if (r.Checked)
-                {
-                    r.DeleteSelf();
-                }
-            }
-        }
-
-        public String Name
-        {
-            get
-            {
-                return this.name;
-            }
-            set
-            {
-                if (!this.name.Equals(value))
-                {
-                    tableNameData.SetValue(value);
-                    consume_name_update = true;
-                    controller.NotifyNameChanged(value);
-                }
-
-            }
-        }
-
-        public ColumnModel GetColumn(int index)
-        {
-            return columns.ElementAt(index);
-        }
-
-        public List<ColumnModel> Columns {
-            get { return columns; }
         }
 
         private void AddColumn(DataSnapshot dataSnapshot, int index)
@@ -181,11 +96,10 @@ namespace App1.Droid.Table.Models
             }
             controller.NotifyColumnAdded(column, index);
         }
-
         private void UpdateColumn(DataSnapshot columnData, int index)
         {
             String type = columnData.Child("type").Value.ToString();
-            if (type != columns.ElementAt(index).type)
+            if (type != columns[index].type)
             {
 
                 ColumnModel column = GetColumnCell(columnData);
@@ -204,7 +118,6 @@ namespace App1.Droid.Table.Models
                 columns[index].SetData(columnData);
             }
         }
-
         private void DeleteColumn(int index)
         {
             columns.RemoveAt(index);
@@ -215,33 +128,93 @@ namespace App1.Droid.Table.Models
             controller.NotifyColumnDeleted(index);
         }
 
+        private void AddNewRow()
+        {
+            DatabaseReference newRowRef =
+                    databaseRows.Child(newRowId);
+
+            RowModel newRow = new RowModel(this, newRowRef)
+            {
+                RowKey = newRowId
+            };
+
+            rows.Add(newRow);
+            controller.NewRowAdded(newRow);
+        }
         private void AddRow(RowModel row, int index)
         {
             rows.Add(row);
             controller.NotifyRowAdded(index, row);
         }
-
         private void DeleteRow(int index)
         {
             rows.RemoveAt(index);
             controller.NotifyRowDeleted(index);
         }
-
-        public RowModel GetRow(int index)
+        public void DeleteCheckedRows()
         {
-            return rows.ElementAt(index);
+            foreach (RowModel r in rows)
+            {
+                if (r.Checked)
+                {
+                    r.DeleteSelf();
+                }
+            }
         }
 
+        public void UserCheckedRow(bool check)
+        {
+            controller.UserCheckedRow(check);
+        }
+
+        public TableView GetTableView(Activity context)
+        {
+            return new TableView(context, controller);
+        }
+        private ColumnModel GetColumnCell(DataSnapshot cell)
+        {
+            String type = cell.Child("type").Value.ToString();
+                switch(type){
+                    case "TEXT":
+                        return new ColumnModelText(cell);
+                    case "NUMBER":
+                        return new ColumnModelNumber(cell);
+                    case "CHOICE":
+                        return new ColumnModelChoice(cell);
+                    case "IMAGE":
+                        return new ColumnModelImage(cell);
+                    case "DATE":
+                        return new ColumnModelDate(cell);
+
+            }
+                return new ColumnModelText();
+        }
+        public TableView GetView(MainActivity mainActivity)
+        {
+            return new TableView(mainActivity, controller);
+        }
+
+        public String Name
+        {
+            get
+            {
+                return this.name;
+            }
+            set
+            {
+                consume_name_update = true;
+                tableNameData.SetValue(value);
+                controller.NotifyNameChanged(value);
+            }
+        }
+        public List<ColumnModel> Columns {
+            get { return columns; }
+        }
         public List<RowModel> Rows {
             get
             {
                 return rows;
             }
-        }
-
-        internal TableView GetView(MainActivity mainActivity)
-        {
-            return new TableView(mainActivity, controller);
         }
 
         class RowDataListener : Java.Lang.Object, IValueEventListener
@@ -314,7 +287,7 @@ namespace App1.Droid.Table.Models
                 {
                     for (int i = 0; i < parentTable.columns.Count; ++i)
                     {
-                        if (parentTable.columns.ElementAt(i).ColumnId.Equals(previousChildName))
+                        if (parentTable.columns[i].ColumnId.Equals(previousChildName))
                         {
                             columnPosition = i + 1;
                             break;
@@ -324,15 +297,14 @@ namespace App1.Droid.Table.Models
 
                 parentTable.AddColumn(dataSnapshot, columnPosition);
             }
-
-            //data about column changed
+            
             public void OnChildChanged(DataSnapshot dataSnapshot, String previousChildName)
             {
 
                 int columnPosition = -1;
                 for (int i = 0; i < parentTable.columns.Count; ++i)
                 {
-                    if (parentTable.columns.ElementAt(i).ColumnId.Equals(dataSnapshot.Key))
+                    if (parentTable.columns[i].ColumnId.Equals(dataSnapshot.Key))
                     {
                         columnPosition = i;
                         break;
@@ -351,7 +323,7 @@ namespace App1.Droid.Table.Models
 
                 for (int i = 0; i < parentTable.columns.Count; ++i)
                 {
-                    if (parentTable.columns.ElementAt(i).ColumnId.Equals(columnId))
+                    if (parentTable.columns[i].ColumnId.Equals(columnId))
                     {
                         columnPosition = i;
                         break;
@@ -380,8 +352,7 @@ namespace App1.Droid.Table.Models
             {
                 parentTable = parent;
             }
-
-
+            
             public void OnChildAdded(DataSnapshot dataSnapshot, String previousChildName)
             {
 
@@ -395,7 +366,7 @@ namespace App1.Droid.Table.Models
                 else
                 {
                     RowModel row = new RowModel(parentTable, dataSnapshot.Ref);
-                    row.RowId = dataSnapshot.Key;
+                    row.RowKey = dataSnapshot.Key;
 
                     if (previousChildName == null || previousChildName.Equals(""))
                     {
@@ -407,7 +378,7 @@ namespace App1.Droid.Table.Models
 
                         for (int i = 0; i < parentTable.rows.Count; ++i)
                         {
-                            if (parentTable.rows.ElementAt(i).RowId.Equals(previousChildName))
+                            if (parentTable.rows[i].RowKey.Equals(previousChildName))
                             {
                                 parentTable.AddRow(row, i + 1);
                                 rowadded = true;
@@ -442,7 +413,7 @@ namespace App1.Droid.Table.Models
 
                 for (int i = 0; i < parentTable.rows.Count; ++i)
                 {
-                    if (parentTable.rows.ElementAt(i).RowId.Equals(rowKey))
+                    if (parentTable.rows[i].RowKey.Equals(rowKey))
                     {
                         parentTable.DeleteRow(i);
                         break;

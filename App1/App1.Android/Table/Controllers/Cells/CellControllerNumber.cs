@@ -6,9 +6,6 @@ using System.Text;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using App1.Droid.Table.Models.Cells;
 using App1.Droid.Table.Views.Cells;
 
@@ -30,7 +27,6 @@ namespace App1.Droid.Table.Controllers.Cells
             cellViews.Add(cellViewNumber);
             cellViewNumber.SetData(cellModelNumber.Data);
         }
-
         internal void UnhookView(CellViewNumber cellViewNumber)
         {
             cellViews.Remove(cellViewNumber);
@@ -42,8 +38,7 @@ namespace App1.Droid.Table.Controllers.Cells
             {
                 view.SetData(number);
             }
-        }
-        
+        }    
         internal void UserSetData(string text)
         {
             cellModelNumber.Data = text;

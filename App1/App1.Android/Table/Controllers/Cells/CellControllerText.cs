@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using App1.Droid.Table.Models.Cells;
 using App1.Droid.Table.Views.Cells;
 
@@ -16,6 +15,16 @@ namespace App1.Droid.Table.Controllers.Cells
             cellViews = new List<CellViewText>();
         }
 
+        internal void HookView(CellViewText cellViewText)
+        {
+            cellViews.Add(cellViewText);
+            cellViewText.SetData(cellModelText.Data);
+        }
+        internal void UnhookView(CellViewText cellViewText)
+        {
+            cellViews.Remove(cellViewText);
+        }
+
         internal void NotifyDataChanged(string text)
         {
             foreach(CellViewText view in cellViews)
@@ -23,18 +32,6 @@ namespace App1.Droid.Table.Controllers.Cells
                 view.SetData(text);
             }
         }
-
-        internal void HookView(CellViewText cellViewText)
-        {
-            cellViews.Add(cellViewText);
-            cellViewText.SetData(cellModelText.Data);
-        }
-
-        internal void UnhookView(CellViewText cellViewText)
-        {
-            cellViews.Remove(cellViewText);
-        }
-
         internal void UserSetData(string text)
         {
             cellModelText.Data = text;

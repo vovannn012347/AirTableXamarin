@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
+﻿using System.Globalization;
 
 using Android.App;
 using App1.Droid.Table.Controllers.Cells;
@@ -18,9 +14,8 @@ namespace App1.Droid.Table.Models.Cells
         string date;
         CellControllerDate controller;
 
-        public CellModelDate(ColumnModel parent)
+        public CellModelDate(ColumnModel parent) : base(parent)
         {
-            parentColumn = parent;
             controller = new CellControllerDate(this);
             consume_update = false;
         }
@@ -29,7 +24,16 @@ namespace App1.Droid.Table.Models.Cells
         {
             return new CellViewDate(context, controller);
         }
+        public DateTimeFormatInfo GetFormat()
+        {
+            return ((ColumnModelDate)parentColumn).GetFormat();
+        }
 
+        public override void ColumnChangeSetData(string data)
+        {
+            date = data;
+            controller.NotifyDataChanged(date);
+        }
         public override void SetData(DataSnapshot data)
         {
             if (consume_update)
@@ -41,30 +45,24 @@ namespace App1.Droid.Table.Models.Cells
             date = data.Value.ToString();
             controller.NotifyDataChanged(date);
         }
-
-        public override void ColumnChangeSetData(string data)
+        public override void EraseData()
         {
-            date = data;
+            date = "";
             controller.NotifyDataChanged(date);
         }
 
-        public DateTimeFormatInfo GetFormat()
-        {
-            return ((ColumnModelDate)parentColumn).GetFormat();
-        }
-
-        public override String Data
+        public override string Data
         {
             get
             {
-                return this.date;
+                return date;
             }
             set
             {
                 date = value;
                 controller.NotifyDataChanged(date);
                 consume_update = true;
-                if (!System.String.IsNullOrEmpty(value))
+                if (!string.IsNullOrEmpty(value))
                 {
                     Row_Ref.Child(parentColumn.ColumnId).SetValue(value);
                 }
@@ -75,12 +73,6 @@ namespace App1.Droid.Table.Models.Cells
             }
         }
         
-        public override void EraseData()
-        {
-            date = "";
-            controller.NotifyDataChanged(date);
-        }
-
 
     }
 }

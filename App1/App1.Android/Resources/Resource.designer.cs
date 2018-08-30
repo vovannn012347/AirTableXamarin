@@ -3372,8 +3372,8 @@ namespace App1.Droid
 			// aapt resource value: 0x7f0c00cf
 			public const int action_divider = 2131493071;
 			
-			// aapt resource value: 0x7f0c00ee
-			public const int action_edit = 2131493102;
+			// aapt resource value: 0x7f0c00f1
+			public const int action_edit = 2131493105;
 			
 			// aapt resource value: 0x7f0c00c9
 			public const int action_image = 2131493065;
@@ -3393,8 +3393,8 @@ namespace App1.Droid
 			// aapt resource value: 0x7f0c006f
 			public const int action_mode_close_button = 2131492975;
 			
-			// aapt resource value: 0x7f0c00ef
-			public const int action_save = 2131493103;
+			// aapt resource value: 0x7f0c00f2
+			public const int action_save = 2131493106;
 			
 			// aapt resource value: 0x7f0c00ca
 			public const int action_text = 2131493066;
@@ -3474,8 +3474,8 @@ namespace App1.Droid
 			// aapt resource value: 0x7f0c0041
 			public const int collapseActionView = 2131492929;
 			
-			// aapt resource value: 0x7f0c00e2
-			public const int columnRow = 2131493090;
+			// aapt resource value: 0x7f0c00e5
+			public const int columnRow = 2131493093;
 			
 			// aapt resource value: 0x7f0c009e
 			public const int column_text = 2131493022;
@@ -3534,8 +3534,8 @@ namespace App1.Droid
 			// aapt resource value: 0x7f0c0029
 			public const int disableHome = 2131492905;
 			
-			// aapt resource value: 0x7f0c00e3
-			public const int drawerMenu = 2131493091;
+			// aapt resource value: 0x7f0c00e6
+			public const int drawerMenu = 2131493094;
 			
 			// aapt resource value: 0x7f0c0091
 			public const int edit_query = 2131493009;
@@ -3576,6 +3576,9 @@ namespace App1.Droid
 			// aapt resource value: 0x7f0c006b
 			public const int forever = 2131492971;
 			
+			// aapt resource value: 0x7f0c00e1
+			public const int frameLayout1 = 2131493089;
+			
 			// aapt resource value: 0x7f0c000a
 			public const int ghost_view = 2131492874;
 			
@@ -3587,6 +3590,9 @@ namespace App1.Droid
 			
 			// aapt resource value: 0x7f0c002a
 			public const int homeAsUp = 2131492906;
+			
+			// aapt resource value: 0x7f0c00e2
+			public const int horizontalScrollView1 = 2131493090;
 			
 			// aapt resource value: 0x7f0c0075
 			public const int icon = 2131492981;
@@ -3603,8 +3609,8 @@ namespace App1.Droid
 			// aapt resource value: 0x7f0c0072
 			public const int image = 2131492978;
 			
-			// aapt resource value: 0x7f0c00e9
-			public const int imageView2 = 2131493097;
+			// aapt resource value: 0x7f0c00ec
+			public const int imageView2 = 2131493100;
 			
 			// aapt resource value: 0x7f0c00d5
 			public const int info = 2131493077;
@@ -3645,17 +3651,17 @@ namespace App1.Droid
 			// aapt resource value: 0x7f0c0074
 			public const int list_item = 2131492980;
 			
-			// aapt resource value: 0x7f0c00e4
-			public const int main_layout = 2131493092;
+			// aapt resource value: 0x7f0c00e7
+			public const int main_layout = 2131493095;
 			
-			// aapt resource value: 0x7f0c00eb
-			public const int masked = 2131493099;
+			// aapt resource value: 0x7f0c00ee
+			public const int masked = 2131493102;
 			
 			// aapt resource value: 0x7f0c00ce
 			public const int media_actions = 2131493070;
 			
-			// aapt resource value: 0x7f0c00e7
-			public const int message = 2131493095;
+			// aapt resource value: 0x7f0c00ea
+			public const int message = 2131493098;
 			
 			// aapt resource value: 0x7f0c0039
 			public const int middle = 2131492921;
@@ -3744,8 +3750,8 @@ namespace App1.Droid
 			// aapt resource value: 0x7f0c00dd
 			public const int nameEdit = 2131493085;
 			
-			// aapt resource value: 0x7f0c00e5
-			public const int nav_view = 2131493093;
+			// aapt resource value: 0x7f0c00e8
+			public const int nav_view = 2131493096;
 			
 			// aapt resource value: 0x7f0c00a8
 			public const int navigation_header_container = 2131493032;
@@ -3753,8 +3759,8 @@ namespace App1.Droid
 			// aapt resource value: 0x7f0c0043
 			public const int never = 2131492931;
 			
-			// aapt resource value: 0x7f0c00ed
-			public const int new_table_menu = 2131493101;
+			// aapt resource value: 0x7f0c00f0
+			public const int new_table_menu = 2131493104;
 			
 			// aapt resource value: 0x7f0c001f
 			public const int none = 2131492895;
@@ -3833,6 +3839,9 @@ namespace App1.Droid
 			
 			// aapt resource value: 0x7f0c007b
 			public const int scrollView = 2131492987;
+			
+			// aapt resource value: 0x7f0c00e3
+			public const int scrollView1 = 2131493091;
 			
 			// aapt resource value: 0x7f0c005c
 			public const int scrollable = 2131492956;
@@ -3939,11 +3948,11 @@ namespace App1.Droid
 			// aapt resource value: 0x7f0c0028
 			public const int tabMode = 2131492904;
 			
-			// aapt resource value: 0x7f0c00ec
-			public const int tableSelection = 2131493100;
+			// aapt resource value: 0x7f0c00ef
+			public const int tableSelection = 2131493103;
 			
-			// aapt resource value: 0x7f0c00e1
-			public const int table_data = 2131493089;
+			// aapt resource value: 0x7f0c00e4
+			public const int table_data = 2131493092;
 			
 			// aapt resource value: 0x7f0c0019
 			public const int tag_transition_group = 2131492889;
@@ -3960,8 +3969,8 @@ namespace App1.Droid
 			// aapt resource value: 0x7f0c007c
 			public const int textSpacerNoTitle = 2131492988;
 			
-			// aapt resource value: 0x7f0c00e8
-			public const int textView2 = 2131493096;
+			// aapt resource value: 0x7f0c00eb
+			public const int textView2 = 2131493099;
 			
 			// aapt resource value: 0x7f0c00ad
 			public const int text_input_password_toggle = 2131493037;
@@ -3984,8 +3993,8 @@ namespace App1.Droid
 			// aapt resource value: 0x7f0c0082
 			public const int title_template = 2131492994;
 			
-			// aapt resource value: 0x7f0c00e6
-			public const int toolbar = 2131493094;
+			// aapt resource value: 0x7f0c00e9
+			public const int toolbar = 2131493097;
 			
 			// aapt resource value: 0x7f0c0046
 			public const int top = 2131492934;
@@ -4023,8 +4032,8 @@ namespace App1.Droid
 			// aapt resource value: 0x7f0c0016
 			public const int view_offset_helper = 2131492886;
 			
-			// aapt resource value: 0x7f0c00ea
-			public const int visible = 2131493098;
+			// aapt resource value: 0x7f0c00ed
+			public const int visible = 2131493101;
 			
 			// aapt resource value: 0x7f0c00c0
 			public const int volume_item_container = 2131493056;

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 using Android.App;
 using Android.Text;
@@ -15,10 +14,13 @@ namespace App1.Droid.Table.Views
     class TableView : Java.Lang.Object, Android.Views.View.IOnClickListener
     {
         private TableController controller;
-        private Activity parentActivity;
+        private readonly Activity parentActivity;
 
         private List<ColumnView> columns;
         private List<TableRowView> rows;
+
+        private readonly NameChangeListener nameListener;
+        private readonly OnCheckedListener onCheckedListener;
 
         private View table_view;
         private TableLayout tableView;
@@ -33,14 +35,19 @@ namespace App1.Droid.Table.Views
         private bool consume_send_name;
         private bool consume_change_name;
 
-        private NameChangeListener nameListener;
-        private OnCheckedListener onCheckedListener;
-
         const int ADDITIONAL_COLUMNS = 2;
         const int ADDITIONAL_ROWS = 1;
 
-        public TableView(Activity context, TableController controller)
+        public TableView()
         {
+            columns = new List<ColumnView>();
+            rows = new List<TableRowView>();
+        }
+
+        public TableView(Activity context, TableController controller) : this()
+        {
+            this.controller = controller;
+            this.parentActivity = context;
 
             table_view = context.LayoutInflater.Inflate(Resource.Layout.table_layout, null);
 
@@ -50,28 +57,22 @@ namespace App1.Droid.Table.Views
             deleteButton = table_view.FindViewById<ImageButton>(Resource.Id.deleteButton);
             deleteButton.SetOnClickListener(this);
 
-            nameListener = new NameChangeListener(this);
             tableName = table_view.FindViewById<EditText>(Resource.Id.nameEdit);
+            nameListener = new NameChangeListener(this);
             tableName.AddTextChangedListener(nameListener);
 
-            onCheckedListener = new OnCheckedListener(this);
             checkBoxView = new CheckBox(context);
-            column_row_view.AddView(checkBoxView);
+            onCheckedListener = new OnCheckedListener(this);
             checkBoxView.SetOnCheckedChangeListener(onCheckedListener);
+            column_row_view.AddView(checkBoxView);
 
             View dummy = new View(context);
             column_row_view.AddView(dummy);
-
-            this.controller = controller;
-            parentActivity = context;
-
-            columns = new List<ColumnView>();
-            rows = new List<TableRowView>();
-
+            
             controller.HookView(this);
         }
 
-        internal void Initiate(List<ColumnModel> columns, List<RowModel> rows)
+        public void Initiate(List<ColumnModel> columns, List<RowModel> rows)
         {
             foreach(ColumnModel model in columns)
             {
@@ -87,53 +88,7 @@ namespace App1.Droid.Table.Views
                 tableView.AddView(v.GetView());
             }
         }
-
-        public View GetView()
-        {
-            return table_view;
-        }
-
-        public void DeleteView()
-        {
-            consume_checked = false;
-            Checked(false);
-            controller.UnhookView(this);
-
-            foreach(ColumnView v in columns)
-            {
-                v.DeleteView();
-            }
-
-            foreach(TableRowView v in rows)
-            {
-                v.DeleteView();
-            }
-        }
-
-        public void OnClick(View v)
-        {
-            if (v.Id == Resource.Id.deleteButton && checked_amount > 0)
-            {
-                controller.UserDeletedCheckedRows();
-            }
-            //just to be safe
-            checked_amount = 0;
-        }
-
-        private void Checked(bool checkedChanged)
-        {
-            if (consume_checked)
-            {
-                consume_checked = false;
-                return;
-            }
-
-            foreach (TableRowView row in rows)
-            {
-                 row.SetChecked(checkedChanged);
-            }
-        }
-
+        
         public void ColumnAdded(ColumnModel model, int index)
         {
             ColumnView v = model.GetView(parentActivity);
@@ -172,7 +127,7 @@ namespace App1.Droid.Table.Views
 
         public void RowDeleted(int index)
         {
-            rows.ElementAt(index).DeleteView();
+            rows[index].DeleteView();
             rows.RemoveAt(index);
             tableView.RemoveViewAt(index + ADDITIONAL_ROWS);
         }
@@ -206,6 +161,27 @@ namespace App1.Droid.Table.Views
             
         }
 
+        private void Checked(bool checkedChanged)
+        {
+            if (consume_checked)
+            {
+                consume_checked = false;
+                return;
+            }
+
+            foreach (TableRowView row in rows)
+            {
+                row.UserChecked(checkedChanged);
+                 row.SetChecked(checkedChanged);
+            }
+        }
+
+        public void UserChangedName()
+        {
+            consume_change_name = true;
+            controller.UserChangedName(tableName.Text);
+        }
+
         public void SetName(string name)
         {
             if (consume_change_name)
@@ -217,10 +193,36 @@ namespace App1.Droid.Table.Views
             tableName.Text = name;
         }
 
-        public void UserChangedName()
+        public View GetView()
         {
-            consume_change_name = true;
-            controller.UserChangedName(tableName.Text);
+            return table_view;
+        }
+
+        public void DeleteView()
+        {
+            consume_checked = false;
+            Checked(false);
+            controller.UnhookView(this);
+
+            foreach(ColumnView v in columns)
+            {
+                v.DeleteView();
+            }
+
+            foreach(TableRowView v in rows)
+            {
+                v.DeleteView();
+            }
+        }
+
+        public void OnClick(View v)
+        {
+            if (v.Id == Resource.Id.deleteButton && checked_amount > 0)
+            {
+                controller.UserDeletedCheckedRows();
+            }
+            //just to be safe
+            checked_amount = 0;
         }
 
         class NameChangeListener : Java.Lang.Object, ITextWatcher {
@@ -243,6 +245,7 @@ namespace App1.Droid.Table.Views
                 if (timer != null)
                 {
                     timer.Cancel();
+                    timer = null;
                 }
             }
             
@@ -272,6 +275,7 @@ namespace App1.Droid.Table.Views
             public override void Run()
             {
                 updated.UserChangedName();
+                this.Cancel();
             }
         }
 
@@ -282,7 +286,6 @@ namespace App1.Droid.Table.Views
             public OnCheckedListener(TableView parent){
                 parentView = parent;
             }
-
             
             public void OnCheckedChanged(CompoundButton buttonView, bool isChecked)
             {

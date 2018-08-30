@@ -22,19 +22,7 @@ namespace App1.Droid.Table.Views.Cells
             cell_controller = controller;
             cell_controller.HookView(this);
         }
-
-
-        public override void DeleteView()
-        {
-            cell_controller.UnhookView(this);
-        }
-
-        public override View GetView()
-        {
-            return numberView;
-        }
-
-
+        
         public override void SetData(string data)
         {
             if (consume_update)
@@ -47,27 +35,22 @@ namespace App1.Droid.Table.Views.Cells
             numberView.Text = data;
 
         }
-
         private void UploadChanges()
         {
             string text = numberView.Text.ToString();
             consume_update = true;
             cell_controller.UserSetData(text);
         }
-
-
+        
         public void BeforeTextChanged(ICharSequence s, int start, int count, int after)
         {
 
         }
-
-
         public void OnTextChanged(ICharSequence s, int start, int before, int count)
         {
             if (timer != null)
                 timer.Cancel();
         }
-
         public void AfterTextChanged(IEditable s)
         {
 
@@ -81,7 +64,15 @@ namespace App1.Droid.Table.Views.Cells
             timer.Schedule(new UploadChangesTimerTask(this), 3000);
         }
 
-        //uhh, so microsoft imported a class and did not supply base class features dependent on language
+        public override void DeleteView()
+        {
+            cell_controller.UnhookView(this);
+        }
+        public override View GetView()
+        {
+            return numberView;
+        }
+        
         class UploadChangesTimerTask : TimerTask
         {
             CellViewText caller;

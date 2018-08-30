@@ -16,42 +16,50 @@ namespace App1.Droid.Table.Views.Cells
         ImageButton imageView;
         CellControllerImage controller;
         Activity context;
-
+        bool editdialog;
+        
         public CellViewImage(Activity context, CellControllerImage controller)
         {
             this.context = context;
+            editdialog = false;
             imageView = new ImageButton(context);
             imageView.SetOnClickListener(this);
             imageView.SetBackgroundColor(Color.Transparent);
             imageView.SetImageResource(Android.Resource.Drawable.IcInputAdd);
 
             this.controller = controller;
-
             controller.HookView(this);
         }
-
         
-        public override void DeleteView()
-        {
-            controller.UnhookView(this);
-            controller = null;
-        }
-        
-        public override void SetData(string data)
-        {
-            //todo: decode image from string
-            //not used
-        }
-
         public void OnSuccess(Object result)
         {
             Glide.With(imageView.Context).Load(result.ToString()).Into(imageView);
+        }
+        public void OnClick(View v)
+        {
+            if (imageName != null)
+            {
+                if (context.FragmentManager.FindFragmentByTag("image_dialog") != null)
+                {
+                    return;
+                }
+                EditImageDialog dialog = new EditImageDialog(context, controller);
+                dialog.Show(context.FragmentManager, "image_dialog");
+            }
+            else
+            {
+                ((IImageProvider)imageView.Context).LoadImage(this);
+            }
+        }
+        public void receiveImage(Bitmap imageBitmap, string name)
+        {
+            controller.ImageUpdated(imageBitmap, name);
         }
 
         public void SetImage(StorageReference Ref)
         {
             //todo: redo this into asynktask
-            if(Ref != null)
+            if (Ref != null)
             {
                 imageName = Ref.Name;
                 Task uploadtask = Ref.DownloadUrl;
@@ -63,63 +71,19 @@ namespace App1.Droid.Table.Views.Cells
                 imageView.SetImageResource(Android.Resource.Drawable.IcInputAdd);
             }
         }
-        
-        public void OnClick(View v)
+        public override void SetData(string data)
         {
-            if (imageName != null)
-            {
-                EditImageDialog dialog = new EditImageDialog(context, controller);
-                dialog.Show(context.FragmentManager, "image_dialog");
-            }
-            else
-            {
-                ((IImageProvider)imageView.Context).LoadImage(this);
-            }
-        }
-
-        public void receiveImage(Bitmap imageBitmap, string name)
-        {
-            controller.ImageUpdated(imageBitmap, name);
+            // decode image from string?
         }
 
         public override View GetView()
         {
             return imageView;
         }
-
-        public override View GetDialogView()
+        public override void DeleteView()
         {
-            Task uploadtask = controller.GetFullImageRef().DownloadUrl;
-            uploadtask.AddOnSuccessListener(this);
-
-            return imageView;
+            controller.UnhookView(this);
+            controller = null;
         }
-
-        /* a dump of wasted time
-Bitmap getBitmap(Android.Net.Uri uri)
-{
-   return Media.GetBitmap(imageView.Context.ContentResolver, uri);
-}
-public void OnSuccess(Java.Lang.Object result)
-{
-   //ok, lets assume it is uri
-   Android.Net.Uri uri = (Android.Net.Uri)result;
-   //got uri? upload it
-
-   Thread t = new Thread(
-       () =>
-       {
-           Bitmap b = getBitmap(uri);
-
-           t->run
-       }
-
-    );
-
-   Task<Bitmap> load = getBitmap(uri);
-
-   //redo into async
-   imageView.SetImageBitmap(b);
-}*/
     }
 }

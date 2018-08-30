@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using App1.Droid.Table.Controllers.Cells;
@@ -29,36 +23,6 @@ namespace App1.Droid.Table.Views.Cells
 
         }
         
-        public override void DeleteView()
-        {
-            controller.UnhookView(this);
-            controller = null;
-            this.Dispose();
-        }
-
-        public override void SetData(String data)
-        {
-            //not used
-        }
-
-        public void SetSelection(int index)
-        {
-            if (consume_update)
-            {
-                consume_update = false;
-                return;
-            }
-            consume_send = true;
-            view.SetSelection(index);
-        }
-
-        
-        public override View GetView()
-        {
-            return view;
-        }
-
-        
         public void OnItemSelected(AdapterView parentView, View selectedItemView, int position, long id)
 
         {
@@ -70,10 +34,33 @@ namespace App1.Droid.Table.Views.Cells
             consume_update = true;
             controller.UserSetData("" + position);
         }
-
-        
         public void OnNothingSelected(AdapterView parentView)
         {
         }
-    }
+
+        public override void SetData(String data)
+        {
+            //not used
+        }
+        public void SetSelection(int index)
+        {
+            if (consume_update)
+            {
+                consume_update = false;
+                return;
+            }
+            consume_send = true;
+            view.SetSelection(index);
+        }
+        public override View GetView()
+        {
+            return view;
+        }
+        public override void DeleteView()
+        {
+            controller.UnhookView(this);
+            controller = null;
+            this.Dispose();
+        }
+}
 }

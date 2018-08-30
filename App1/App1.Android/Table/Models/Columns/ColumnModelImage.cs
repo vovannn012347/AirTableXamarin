@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using Android.App;
 using App1.Droid.Table.Controllers;
 using App1.Droid.Table.Models.Cells;
-using App1.Droid.Table.Views;
 using Firebase.Database;
 using Firebase.Storage;
 
@@ -14,23 +12,7 @@ namespace App1.Droid.Table.Models.Columns
     {
         StorageReference Ref;
 
-        public ColumnModelImage() : base()
-        {
-            controller = new ColumnController(this);
-        }
-
-        public ColumnModelImage(DataSnapshot data) : base(data)
-        {
-            controller = new ColumnController(this);
-        }
-
-        public override ColumnView GetView(Activity context)
-        {
-            ColumnView cv = new ColumnView(context, controller);
-            return cv;
-        }
-
-        public StorageReference getRef()
+        public StorageReference GetRef()
         {
             if (Ref == null){
                 String path = data.GetValueOrDefault("ref");
@@ -45,8 +27,7 @@ namespace App1.Droid.Table.Models.Columns
             }
             return Ref;
         }
-
-        public override CellModel constructCell()
+        public override CellModel ConstructCell()
         {
             return new CellModelImage(this);
         }

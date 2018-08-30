@@ -20,9 +20,8 @@ namespace App1.Droid.Table.Controllers
         public void HookView(IRowView rowView)
         {
             rowViews.Add(rowView);
-            rowView.Initiate(rowModel.Cells, rowModel.GetColumns());
+            rowView.Initiate(rowModel.Cells, rowModel.Columns);
         }
-
         public void UnhookView(IRowView rowView)
         {
             rowViews.Remove(rowView);
@@ -35,20 +34,18 @@ namespace App1.Droid.Table.Controllers
                 v.ColumnAdded(index, cellModel, columnModel);
             }
         }
-
-        public void NotifyColumnDeleted(int index)
-        {
-            foreach (IRowView v in rowViews)
-            {
-                v.ColumnDeleted(index);
-            }
-        }
-
         public void NotifyColumnUpdated(int index, CellModel newCell, ColumnModel columnModel)
         {
             foreach (IRowView v in rowViews)
             {
                 v.ColumnChanged(index, newCell, columnModel);
+            }
+        }
+        public void NotifyColumnDeleted(int index)
+        {
+            foreach (IRowView v in rowViews)
+            {
+                v.ColumnDeleted(index);
             }
         }
 
@@ -59,7 +56,6 @@ namespace App1.Droid.Table.Controllers
                 v.SetChecked(isChecked);
             }
         }
-
         public void UserCheckedRow(bool check)
         {
             rowModel.Checked = check;

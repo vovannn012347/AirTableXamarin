@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.IO;
-using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Gms.Tasks;
 using Android.Graphics;
-using Android.Views;
 using App1.Droid.Table.Controllers.Cells;
 using App1.Droid.Table.Models.Columns;
 using App1.Droid.Table.Views;
 using App1.Droid.Table.Views.Cells;
 using Firebase.Database;
 using Firebase.Storage;
-using Java.IO;
-using Java.Lang;
 
 namespace App1.Droid.Table.Models.Cells
 {
@@ -25,18 +19,42 @@ namespace App1.Droid.Table.Models.Cells
         StorageReference StorageRef;
         CellControllerImage controller;
 
-        public CellModelImage(ColumnModel parent)
+        public CellModelImage(ColumnModel parent) : base(parent)
         {
-            parentColumn = parent;
             controller = new CellControllerImage(this);
-            consume_update = false;
         }
 
+        public void OnSuccess(Java.Lang.Object result)
+        {
+            controller.NotifyDataChanged(((ColumnModelImage)parentColumn).GetRef().Child("thumbnail_" + imageName));
+        }
+    
         public override CellView GetView(Activity context)
         {
             return new CellViewImage(context, controller);
         }
-        
+        public StorageReference GetRef()
+        {
+            return StorageRef;
+        }
+
+        public override void ColumnChangeSetData(string data)
+        {
+            imageName = data;
+            if (!System.String.IsNullOrEmpty(imageName))
+            {
+                StorageRef = ((ColumnModelImage)parentColumn).GetRef().Child(imageName);
+
+                controller.NotifyDataChanged(
+                    ((ColumnModelImage)parentColumn).GetRef().Child("thumbnail_" + imageName)
+                   );
+            }
+            else
+            {
+                StorageRef = null;
+                controller.NotifyDataChanged(null);
+            }
+        }
         public override void SetData(DataSnapshot data)
         {
             if (consume_update)
@@ -49,80 +67,15 @@ namespace App1.Droid.Table.Models.Cells
 
             if (!System.String.IsNullOrEmpty(imageName))
             {
-                StorageRef = ((ColumnModelImage)parentColumn).getRef().Child(imageName);
+                StorageRef = ((ColumnModelImage)parentColumn).GetRef().Child(imageName);
                 
-                controller.NotifyDataChanged(((ColumnModelImage)parentColumn).getRef().Child("thumbnail_" + imageName));
+                controller.NotifyDataChanged(((ColumnModelImage)parentColumn).GetRef().Child("thumbnail_" + imageName));
             }
         }
-
-        public override void ColumnChangeSetData(string data)
-        {
-            imageName = data;
-            if (!System.String.IsNullOrEmpty(imageName))
-            {
-                StorageRef = ((ColumnModelImage)parentColumn).getRef().Child(imageName);
-
-                controller.NotifyDataChanged(
-                    ((ColumnModelImage)parentColumn).getRef().Child("thumbnail_" + imageName)
-                   );
-            }
-            else
-            {
-                StorageRef = null;
-                controller.NotifyDataChanged(null);
-            }
-        }
-
-        public StorageReference getFullSizeReference()
-        {
-            return StorageRef;
-        }
-
-        public override string Data{
-            get
-            {
-                return imageName;
-            }
-            set
-            {
-                imageName = value;
-                if (!System.String.IsNullOrEmpty(value))
-                {
-                    StorageRef = ((ColumnModelImage)parentColumn).getRef().Child(imageName);
-                    if(StorageRef != null)
-                    {
-                        controller.NotifyDataChanged(
-                            ((ColumnModelImage)parentColumn).getRef().Child("thumbnail_" +imageName)
-                            );
-                    }
-                    consume_update = true;
-                    Row_Ref.Child(parentColumn.ColumnId).SetValue(value);
-                }
-                else
-                {
-                    StorageRef = null;
-                    controller.NotifyDataChanged(null);
-                    consume_update = true;
-                    Row_Ref.Child(parentColumn.ColumnId).RemoveValue();
-                }
-                
-            }
-        }
-
-        public StorageReference GetRef()
-        {
-            return StorageRef;
-        }
-
-        public override void EraseData()
-        {
-            imageName = "";
-            StorageRef = null;
-            controller.NotifyDataChanged(StorageRef);
-        }
-        
         public void SetImage(Bitmap imageBitmap, string name)
         {
+            if (imageBitmap == null) this.Data = null;
+
             int THUMBNAIL_SIZE = 128;
 
             int outWidth;
@@ -144,7 +97,7 @@ namespace App1.Droid.Table.Models.Cells
             imageBitmap.Compress(Bitmap.CompressFormat.Png, 100, baos1);
             byte[] arr = baos1.ToArray();
 
-            ((ColumnModelImage) parentColumn).getRef().Child(name).PutBytes(arr);
+            ((ColumnModelImage) parentColumn).GetRef().Child(name).PutBytes(arr);
 
             Bitmap thumbnail =
                     Bitmap.CreateScaledBitmap(imageBitmap, outWidth, outHeight, false);
@@ -153,15 +106,55 @@ namespace App1.Droid.Table.Models.Cells
             thumbnail.Compress(Bitmap.CompressFormat.Jpeg, 100, baos2);
              arr = baos2.ToArray();
            
-            ((ColumnModelImage)parentColumn).getRef().Child("thumbnail_" + name)
+            ((ColumnModelImage)parentColumn).GetRef().Child("thumbnail_" + name)
                 .PutBytes(arr).AddOnSuccessListener(this);
-            
+
+            consume_send = true;
             this.Data = name;
         }
-
-        public void OnSuccess(Java.Lang.Object result)
+        public override void EraseData()
         {
+            imageName = "";
+            StorageRef = null;
             controller.NotifyDataChanged(StorageRef);
         }
-    }
+  
+        public override string Data{
+            get
+            {
+                return imageName;
+            }
+            set
+            {
+
+                imageName = value;
+                if (!System.String.IsNullOrEmpty(value))
+                {
+                    StorageRef = ((ColumnModelImage)parentColumn).GetRef().Child(imageName);
+                    if(StorageRef != null)
+                    {
+                        if (consume_send)
+                        {
+                            consume_send = false;
+                            return;
+                        }
+                        controller.NotifyDataChanged(
+                            ((ColumnModelImage)parentColumn).GetRef().Child("thumbnail_" +imageName)
+                            );
+                    }
+                    consume_update = true;
+                    Row_Ref.Child(parentColumn.ColumnId).SetValue(value);
+                }
+                else
+                {
+                    StorageRef = null;
+                    controller.NotifyDataChanged(null);
+                    consume_update = true;
+                    Row_Ref.Child(parentColumn.ColumnId).RemoveValue();
+                }
+                
+            }
+        }
+        
+       }
 }

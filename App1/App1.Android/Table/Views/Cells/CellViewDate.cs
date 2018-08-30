@@ -4,7 +4,6 @@ using Android.Text;
 using Android.Views;
 using Android.Widget;
 using App1.Droid.Table.Controllers.Cells;
-using Java.Util;
 
 namespace App1.Droid.Table.Views.Cells
 {
@@ -26,24 +25,29 @@ namespace App1.Droid.Table.Views.Cells
             
             controller.HookView(this);
         }
+        
+        public void UploadChanges()
+        {
+            string text = ((EditText)dateText).Text.ToString();
+
+            consume_update = true;
+            controller.UserSetData(text);
+        }
+        public void OnClick(View v)
+        {
+            if (context.FragmentManager.FindFragmentByTag("date_dialog") != null)
+            {
+                return;
+            }
+            EditDateDialog dialog = new EditDateDialog(context, controller);
+            dialog.Show(context.FragmentManager, "date_dialog");
+        }
 
         public void SetDateFormat(System.Globalization.DateTimeFormatInfo format)
         {
             DateFormat = format;
             dateText.Hint = format.ShortDatePattern;
         }
-
-        public override void DeleteView()
-        {
-            controller.UnhookView(this);
-            controller = null;
-        }
-
-        public override View GetView()
-        {
-            return dateText;
-        }
-
         public override void SetData(String data)
         {
             if (consume_update)
@@ -62,19 +66,15 @@ namespace App1.Droid.Table.Views.Cells
             }
            
         }
-        
-        public  void UploadChanges()
-        {
-            string text = ((EditText)dateText).Text.ToString();
 
-            consume_update = true;
-            controller.UserSetData(text);
-        }
-        
-        public void OnClick(View v)
+        public override View GetView()
         {
-            EditDateDialog dialog = new EditDateDialog(context, controller);
-            dialog.Show(context.FragmentManager, "date_dialog");
+            return dateText;
+        }
+        public override void DeleteView()
+        {
+            controller.UnhookView(this);
+            controller = null;
         }
 
     }

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using App1.Droid.Table.Controllers;
@@ -53,6 +47,16 @@ namespace App1.Droid.Table.Views
             controller.HookView(this);
         }
 
+        public void Initiate(List<CellModel> cells, List<ColumnModel> columns)
+        {
+            foreach (CellModel model in cells)
+            {
+                CellView v = model.GetView(context);
+                this.cells.Add(v);
+                row_view.AddView(v.GetView());
+            }
+        }
+
         public void ColumnAdded(int index, CellModel cellModel, ColumnModel columnModel)
         {
             CellView v = cellModel.GetView(context);
@@ -73,40 +77,6 @@ namespace App1.Droid.Table.Views
             row_view.AddView(v.GetView(), index + ADDITIONAL_COLUMNS);
         }
 
-        public void Initiate(List<CellModel> cells, List<ColumnModel> columns)
-        {
-            foreach (CellModel model in cells)
-            {
-                CellView v = model.GetView(context);
-                this.cells.Add(v);
-                row_view.AddView(v.GetView());
-            }
-        }
-
-        public void DeleteView()
-        {
-            UserChecked(false);
-            controller.UnhookView(this);
-        }
-
-        public void OnCheckedChanged(CompoundButton buttonView, bool isChecked)
-        {
-            UserChecked(isChecked);
-        }
-
-        public void OnClick(View v)
-        {
-            EditRowDialog dialog
-                = new EditRowDialog(context, controller);
-
-            dialog.Show(context.FragmentManager, "EditTextDialog");
-        }
-
-        public View GetView()
-        {
-            return row_view;
-        }
-
         public void SetChecked(bool check)
         {
             if (consume_checked_update)
@@ -117,17 +87,43 @@ namespace App1.Droid.Table.Views
             consume_checked_send = true;
             checkBox.Checked = check;
         }
-
         public void UserChecked(bool check)
+        {
+            consume_checked_update = true;
+            controller.UserCheckedRow(check);
+        }
+        public void OnCheckedChanged(CompoundButton buttonView, bool isChecked)
         {
             if (consume_checked_send)
             {
                 consume_checked_send = false;
                 return;
             }
-            consume_checked_update = true;
-            controller.UserCheckedRow(check);
+            UserChecked(isChecked);
         }
 
+        public void OnClick(View v)
+        {
+            if(context.FragmentManager.FindFragmentByTag("EditTextDialog")!= null)
+            {
+                return;
+            }
+
+            EditRowDialog dialog
+                = new EditRowDialog(context, controller);
+
+            dialog.Show(context.FragmentManager, "EditTextDialog");
+        }
+        public View GetView()
+        {
+            return row_view;
+        }
+
+        public void DeleteView()
+        {
+            UserChecked(false);
+            controller.UnhookView(this);
+        }
+        
     }
 }

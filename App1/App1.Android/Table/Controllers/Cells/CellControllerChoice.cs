@@ -1,20 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using App1.Droid.Table.Models.Cells;
 using App1.Droid.Table.Views.Cells;
 
 namespace App1.Droid.Table.Controllers.Cells
 {
-    class CellControllerChoice : CellController
+    class CellControllerChoice
     {
         private CellModelChoice cellModelChoice;
         private List<CellViewChoice> cellViews;
@@ -32,7 +23,6 @@ namespace App1.Droid.Table.Controllers.Cells
             int choiceIndex = int.Parse(cellModelChoice.Data);
             cellViewChoice.SetSelection(choiceIndex);
         }
-
         public void UnhookView(CellViewChoice cellViewChoice)
         {
             cellViews.Remove(cellViewChoice);
@@ -46,13 +36,10 @@ namespace App1.Droid.Table.Controllers.Cells
             {
                 v.SetSelection(choiceIndex);
             }
-        }
-        
+        }      
         public void UserSetData(string v)
         {
             cellModelChoice.Data = v;
         }
-
-
     }
 }

@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using App1.Droid.Table.Controllers;
 using App1.Droid.Table.Views;
 using Firebase.Database;
@@ -27,12 +21,10 @@ namespace App1.Droid.Table.Models
         public ColumnModel()
         {
             this.data = new Dictionary<String, String>();
+            this.controller = new ColumnController(this);
         }
-
-        public ColumnModel(DataSnapshot data)
+        public ColumnModel(DataSnapshot data) : this()
         {
-            this.data = new Dictionary<String, String>();
-
             type = data.Child("type").Value.ToString();
             name = data.Child("name").Value.ToString();
 
@@ -40,6 +32,19 @@ namespace App1.Droid.Table.Models
             {
                 this.data.Add(datum.Key, datum.Value.ToString());
             }
+        }
+
+        public abstract CellModel ConstructCell();
+        public ColumnView GetView(Activity context) {
+            return new ColumnView(context, controller);
+        }
+        public CellModel GetCell()
+        {
+            CellModel ret = ConstructCell();
+
+            ret.ParentColumn = this;
+
+            return ret;
         }
 
         public void SetData(DataSnapshot data)
@@ -70,7 +75,6 @@ namespace App1.Droid.Table.Models
                 this.columnId = value;
             }
         }
-
         public String Name
         {
             get
@@ -83,19 +87,5 @@ namespace App1.Droid.Table.Models
                 this.controller.NotifyNameChanged(name);
             }
         }
-
-        public abstract ColumnView GetView(Activity context);
-
-        public abstract CellModel constructCell();
-        public CellModel GetCell()
-        {
-            CellModel ret = constructCell();
-
-            ret.ParentColumn = this;
-
-            return ret;
-        }
-
-
     }
 }
