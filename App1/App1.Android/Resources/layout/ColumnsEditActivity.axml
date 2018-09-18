@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	<android.support.v7.widget.Toolbar
+		android:minWidth="25px"
+		android:minHeight="?android:attr/actionBarSize"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/toolbarMain"/>
+	<ScrollView
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/scrollView1">
+		<LinearLayout
+			android:orientation="vertical"
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:animateLayoutChanges="true" >
+			<LinearLayout
+				android:orientation="vertical"
+				android:minWidth="25px"
+				android:minHeight="25px"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/linearLayoutEditContent"
+				android:animateLayoutChanges="true" >
+			</LinearLayout>
+			<RelativeLayout
+				android:minWidth="25px"
+				android:minHeight="25px"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/relativeLayoutActionButtons">
+				<ImageView
+					android:src="@drawable/icons_plus_50"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:id="@+id/imageViewAdd"
+					android:padding="5px" />
+				<TextView
+					android:text="@string/add_new_column_string"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_toRightOf="@id/imageViewAdd"
+					android:id="@+id/textView1"
+					android:layout_centerVertical="true" />
+			</RelativeLayout>
+		</LinearLayout>
+	</ScrollView>
+
+	
+
+</LinearLayout>

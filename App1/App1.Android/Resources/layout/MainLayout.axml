@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+	<android.support.v7.widget.Toolbar
+		android:minWidth="25px"
+		android:minHeight="?android:attr/actionBarSize"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/toolbarMain" />
+	<ScrollView
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="fill_parent"
+		android:id="@+id/scrollViewMain"
+		android:layout_below="@id/toolbarMain">
+		<LinearLayout
+			android:animateLayoutChanges="true"
+			android:orientation="vertical"
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:id="@+id/linearLayoutMain">
+			<RelativeLayout
+				android:minWidth="25px"
+				android:minHeight="25px"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/relativeLayoutNewItem"
+				android:background="@color/workspaceHeaderColor"
+				android:paddingBottom="@dimen/workplace_minimum_diastance"
+				android:paddingTop="@dimen/workplace_minimum_diastance"
+				android:paddingLeft="@dimen/workplace_minimum_diastance">
+				<TextView
+					android:text="@string/add_new_workspace_string"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:id="@+id/textViewNewTable"
+					android:layout_centerVertical="true"
+					android:textAllCaps="true"/>
+			</RelativeLayout>
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>

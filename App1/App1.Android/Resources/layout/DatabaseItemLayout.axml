@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"			
+	android:paddingTop="@dimen/workplace_minimum_diastance">
+	<ImageView
+		android:src="@android:drawable/ic_menu_gallery"
+		android:layout_width="@dimen/workplace_image_size"
+		android:layout_height="@dimen/workplace_image_size"
+		android:id="@+id/imageViewElement"
+		android:layout_centerVertical="true"
+		android:cropToPadding="true"
+		android:scaleType="centerCrop"
+		android:layout_marginLeft="@dimen/workplace_minimum_diastance"
+		android:padding="10px" />
+	<TextView
+		android:text="text placeholder"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:gravity="center_vertical"
+		android:id="@+id/textViewNameElement"
+		android:layout_toRightOf="@id/imageViewElement"
+		android:layout_centerVertical="true"
+		android:layout_marginLeft="@dimen/workplace_minimum_diastance"
+		android:textStyle="bold" />
+	<View
+		android:background="#000000"
+		android:layout_height="1px"
+		android:layout_width="match_parent"
+		android:layout_marginTop="@dimen/workplace_minimum_diastance"
+		android:layout_below="@id/imageViewElement" />
+	
+	
+</RelativeLayout>

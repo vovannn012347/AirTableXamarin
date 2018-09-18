@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+	<ImageView
+		android:src="@android:drawable/ic_menu_close_clear_cancel"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/ViewFilterRemove"
+		android:layout_alignParentEnd="true"
+		android:tint="#ff000000" />
+	<LinearLayout
+		android:orientation="horizontal"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_toLeftOf="@id/ViewFilterRemove"
+		android:id="@+id/LinearLayoutContent"
+		android:layout_alignParentLeft="true">
+		<TextView
+			android:text="where"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_margin="15px" />
+		<TextView
+			android:text="Column"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/ViewFilterColumn"
+			android:layout_margin="15px" />
+		<TextView
+			android:text="field"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="15px" />
+		<TextView
+			android:text="CheckType"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/ViewFilterType"
+			android:layout_margin="15px" />
+	</LinearLayout>
+	<TextView
+		android:text="PredicateChecked"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/ViewFilterPredicate"
+		android:layout_margin="15px"
+		android:layout_below="@id/LinearLayoutContent" />
+
+</RelativeLayout>

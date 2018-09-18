@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:padding="20px">
+	<ImageView
+		android:src="@android:drawable/ic_menu_gallery"
+		android:layout_width="@dimen/typechange_image_size"
+		android:layout_height="@dimen/typechange_image_size"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:id="@+id/imageViewColumnType" />
+	<FrameLayout
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/frameLayoutViewName"
+		android:layout_toRightOf="@id/imageViewColumnType"
+		android:layout_alignBaseline="@id/imageViewColumnType" />
+	<LinearLayout
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/linearLayoutOptions"
+		android:layout_below="@id/imageViewColumnType"
+		android:orientation="vertical">
+		<ImageButton
+			android:src="@drawable/icons_plus_50"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/imageButtonAddOption"
+			android:background="#00a07a7a"
+			android:padding="10px" />
+	</LinearLayout>
+
+</RelativeLayout>

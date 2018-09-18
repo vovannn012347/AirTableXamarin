@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:minWidth="25px"
+	android:minHeight="25px"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:padding="8px"
+	android:clickable="true"
+	android:descendantFocusability="blocksDescendants">
+	<App1.Droid.Workspace.Database.Table.CustomComponents.CustomCardView
+		android:minWidth="25px"
+		android:minHeight="@dimen/database_table_item_height"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:cardBackgroundColor="#ffeeeeee"
+		app:cardCornerRadius="10px"
+		app:contentPadding="6px"
+		app:cardElevation="10px"
+		app:cardUseCompatPadding="true"
+		android:clickable="false">
+		<RelativeLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+			<FrameLayout
+				android:src="@android:drawable/ic_menu_gallery"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:minWidth="25px"
+				android:minHeight="25px"
+				android:id="@+id/imageViewItemImage"
+				android:layout_alignParentRight="true"
+				android:layout_alignParentTop="true"
+				android:scaleType="centerCrop"
+				android:layout_alignParentBottom="true" />
+			<RelativeLayout
+				android:minWidth="25px"
+				android:minHeight="25px"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/relativeLayoutFirstCell"
+				android:layout_toLeftOf="@+id/imageViewItemImage"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentTop="true" />
+			<HorizontalScrollView
+				android:minWidth="25px"
+				android:minHeight="25px"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_below="@+id/relativeLayoutFirstCell"
+				android:layout_alignParentLeft="true"
+				android:layout_toLeftOf="@+id/imageViewItemImage"
+				android:fadeScrollbars="true"
+				android:scrollIndicators="none"
+				android:scrollbars="none">
+				<LinearLayout
+					android:orientation="horizontal"
+					android:minWidth="25px"
+					android:minHeight="25px"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:id="@+id/linearLayoutItemContent"
+					android:clickable="false"/>
+			</HorizontalScrollView>
+			<View
+				android:layout_width="wrap_content"
+				android:background="#ff212121"
+				android:layout_height="1px"
+				android:layout_below="@id/relativeLayoutFirstCell"
+				android:layout_alignStart="@id/relativeLayoutFirstCell"
+				android:layout_alignEnd="@id/relativeLayoutFirstCell" />
+		</RelativeLayout>
+	</App1.Droid.Workspace.Database.Table.CustomComponents.CustomCardView>
+</FrameLayout>

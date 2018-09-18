@@ -55,8 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Glide.Xamarin">
-      <Version>4.1.1</Version>
+    <PackageReference Include="Xamarin.Android.Glide">
+      <Version>4.0.0</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Constraint.Layout">
       <Version>1.1.2</Version>
@@ -87,56 +87,94 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="27.0.2.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Workspace\Database\DatabaseActivity.cs" />
+    <Compile Include="Workspace\DatabaseAddActivity.cs" />
+    <Compile Include="Workspace\Database\DatabaseController.cs" />
+    <Compile Include="Workspace\Database\DatabaseEditActivity.cs" />
+    <Compile Include="Workspace\Database\DatabaseListView.cs" />
+    <Compile Include="Workspace\Database\DatabaseModel.cs" />
+    <Compile Include="Workspace\Database\DatabaseView.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Table\Controllers\Cells\CellControllerChoice.cs" />
-    <Compile Include="Table\Controllers\Cells\CellControllerDate.cs" />
-    <Compile Include="Table\Controllers\Cells\CellControllerImage.cs" />
-    <Compile Include="Table\Controllers\Cells\CellControllerNumber.cs" />
-    <Compile Include="Table\Controllers\Cells\CellControllerText.cs" />
-    <Compile Include="Table\Controllers\ColumnController.cs" />
-    <Compile Include="Table\Controllers\RowController.cs" />
-    <Compile Include="Table\Controllers\TableController.cs" />
-    <Compile Include="Table\Interfaces\IImageReciever.cs" />
-    <Compile Include="Table\Interfaces\ImageProvider.cs" />
-    <Compile Include="Table\Models\CellModel.cs" />
-    <Compile Include="Table\Models\Cells\CellModelChoice.cs" />
-    <Compile Include="Table\Models\Cells\CellModelDate.cs" />
-    <Compile Include="Table\Models\Cells\CellModelImage.cs" />
-    <Compile Include="Table\Models\Cells\CellModelNumber.cs" />
-    <Compile Include="Table\Models\Cells\CellModelText.cs" />
-    <Compile Include="Table\Models\ColumnModel.cs" />
-    <Compile Include="Table\Models\Columns\ColumnModelChoice.cs" />
-    <Compile Include="Table\Models\Columns\ColumnModelDate.cs" />
-    <Compile Include="Table\Models\Columns\ColumnModelImage.cs" />
-    <Compile Include="Table\Models\Columns\ColumnModelNumber.cs" />
-    <Compile Include="Table\Models\Columns\ColumnModelText.cs" />
-    <Compile Include="Table\Models\RowModel.cs" />
-    <Compile Include="Table\Models\TableModel.cs" />
-    <Compile Include="Table\Interfaces\ICellViewDate.cs" />
-    <Compile Include="Table\Interfaces\ICellViewImage.cs" />
-    <Compile Include="Table\Dialogs\EditDateDialog.cs" />
-    <Compile Include="Table\Interfaces\IRowView.cs" />
-    <Compile Include="Table\Views\Cells\CellViewChoice.cs" />
-    <Compile Include="Table\Views\Cells\CellViewDate.cs" />
-    <Compile Include="Table\Views\Cells\CellViewImage.cs" />
-    <Compile Include="Table\Views\Cells\CellViewNumber.cs" />
-    <Compile Include="Table\Views\Cells\CellViewText.cs" />
-    <Compile Include="Table\Views\CellView.cs" />
-    <Compile Include="Table\Views\ColumnView.cs" />
-    <Compile Include="Table\Dialogs\EditImageDialog.cs" />
-    <Compile Include="Table\Dialogs\EditRowDialog.cs" />
-    <Compile Include="Table\Views\TableRowView.cs" />
-    <Compile Include="Table\Views\TableView.cs" />
+    <Compile Include="Workspace\Database\Table\Models\FilterController.cs" />
+    <Compile Include="Workspace\Database\Table\Models\FilterStruct.cs" />
+    <Compile Include="Workspace\Database\Table\Models\SortStruct.cs" />
+    <Compile Include="Workspace\Database\Table\Dialogs\FilterDialog.cs" />
+    <Compile Include="Workspace\Database\Table\Views\SortController.cs" />
+    <Compile Include="Workspace\Database\Table\Dialogs\SortDialog.cs" />
+    <Compile Include="Workspace\Database\Table\ColumnsEditActivity.cs" />
+    <Compile Include="Workspace\Database\Table\Controllers\Cells\CellControllerChoice.cs" />
+    <Compile Include="Workspace\Database\Table\Controllers\Cells\CellControllerDate.cs" />
+    <Compile Include="Workspace\Database\Table\Controllers\Cells\CellControllerImage.cs" />
+    <Compile Include="Workspace\Database\Table\Controllers\Cells\CellControllerNumber.cs" />
+    <Compile Include="Workspace\Database\Table\Controllers\Cells\CellControllerText.cs" />
+    <Compile Include="Workspace\Database\Table\Controllers\ColumnController.cs" />
+    <Compile Include="Workspace\Database\Table\Controllers\RowController.cs" />
+    <Compile Include="Workspace\Database\Table\Controllers\TableController.cs" />
+    <Compile Include="Workspace\Database\Table\CustomComponents\CustomCardView.cs" />
+    <Compile Include="Workspace\Database\Table\Dialogs\TypeChangeDialog.cs" />
+    <Compile Include="Workspace\Database\Table\Interfaces\IColumnChangeListener.cs" />
+    <Compile Include="Workspace\Database\Table\Interfaces\IImageReciever.cs" />
+    <Compile Include="Workspace\Database\Table\Interfaces\ImageProvider.cs" />
+    <Compile Include="Workspace\Database\Table\ItemEditActivity.cs" />
+    <Compile Include="Workspace\Database\Table\Models\CellModel.cs" />
+    <Compile Include="Workspace\Database\Table\Models\Cells\CellModelChoice.cs" />
+    <Compile Include="Workspace\Database\Table\Models\Cells\CellModelDate.cs" />
+    <Compile Include="Workspace\Database\Table\Models\Cells\CellModelImage.cs" />
+    <Compile Include="Workspace\Database\Table\Models\Cells\CellModelNumber.cs" />
+    <Compile Include="Workspace\Database\Table\Models\Cells\CellModelText.cs" />
+    <Compile Include="Workspace\Database\Table\Models\ColumnModel.cs" />
+    <Compile Include="Workspace\Database\Table\Models\Columns\ColumnModelChoice.cs" />
+    <Compile Include="Workspace\Database\Table\Models\Columns\ColumnModelDate.cs" />
+    <Compile Include="Workspace\Database\Table\Models\Columns\ColumnModelImage.cs" />
+    <Compile Include="Workspace\Database\Table\Models\Columns\ColumnModelNumber.cs" />
+    <Compile Include="Workspace\Database\Table\Models\Columns\ColumnModelText.cs" />
+    <Compile Include="Workspace\Database\Table\Models\ColumnTextView.cs" />
+    <Compile Include="Workspace\Database\Table\Models\RowModel.cs" />
+    <Compile Include="Workspace\Database\Table\Models\TableModel.cs" />
+    <Compile Include="Workspace\Database\Table\Interfaces\ICellViewDate.cs" />
+    <Compile Include="Workspace\Database\Table\Interfaces\ICellViewImage.cs" />
+    <Compile Include="Workspace\Database\Table\Dialogs\EditDateDialog.cs" />
+    <Compile Include="Workspace\Database\Table\Interfaces\IRowView.cs" />
+    <Compile Include="Workspace\Database\Table\Dialogs\TableRowEditView.cs" />
+    <Compile Include="Workspace\Database\Table\TableEditActivity.cs" />
+    <Compile Include="Workspace\Database\Table\Views\Cells\CellViewChoice.cs" />
+    <Compile Include="Workspace\Database\Table\Views\Cells\CellViewDate.cs" />
+    <Compile Include="Workspace\Database\Table\Views\Cells\CellViewImage.cs" />
+    <Compile Include="Workspace\Database\Table\Views\Cells\CellViewNumber.cs" />
+    <Compile Include="Workspace\Database\Table\Views\Cells\CellViewText.cs" />
+    <Compile Include="Workspace\Database\Table\Views\CellView.cs" />
+    <Compile Include="Workspace\Database\Table\Views\Columns\ColumnViewChoice.cs" />
+    <Compile Include="Workspace\Database\Table\Views\Columns\ColumnViewNumber.cs" />
+    <Compile Include="Workspace\Database\Table\Views\Columns\ColumnViewDate.cs" />
+    <Compile Include="Workspace\Database\Table\Views\Columns\ColumnViewImage.cs" />
+    <Compile Include="Workspace\Database\Table\Views\Columns\ColumnViewText.cs" />
+    <Compile Include="Workspace\Database\Table\Views\ColumnView.cs" />
+    <Compile Include="Workspace\Database\Table\Dialogs\EditImageDialog.cs" />
+    <Compile Include="Workspace\Database\Table\Dialogs\EditRowDialog.cs" />
+    <Compile Include="Workspace\Database\Table\Views\ItemCellView.cs" />
+    <Compile Include="Workspace\Database\Table\Views\ItemView.cs" />
+    <Compile Include="Workspace\Database\Table\Views\TableRowView.cs" />
+    <Compile Include="Workspace\Database\Table\Views\TableView.cs" />
+    <Compile Include="Workspace\Database\Table\Views\TableViewOld.cs" />
+    <Compile Include="Workspace\WorkspaceSchemaEditActivity.cs" />
+    <Compile Include="Workspace\WorkspaceController.cs" />
+    <Compile Include="Workspace\WorkspaceModel.cs" />
+    <Compile Include="Workspace\WorkspaceView.cs" />
   </ItemGroup>
   <ItemGroup>
     <GoogleServicesJson Include="google-services.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
-    <None Include="Properties\AndroidManifest.xml" />
+    <None Include="Properties\AndroidManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icons_compass.png">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\Tabbar.axml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
@@ -166,6 +204,7 @@
     <Folder Include="Resources\drawable-xhdpi\" />
     <Folder Include="Resources\drawable-xxhdpi\" />
     <Folder Include="Resources\drawable-xxxhdpi\" />
+    <Folder Include="Workspace\Database\Table\Controllers\Columns\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\App1\App1.csproj">
@@ -175,9 +214,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Menu\DrawerMenu.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\Menu\menu1.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\strings.xml">
@@ -199,15 +235,272 @@
     <AndroidResource Include="Resources\drawable\drawer_example.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Menu\menu2.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\table_layout.axml">
+    <AndroidResource Include="Resources\layout\column_view.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\column_view.axml">
+    <AndroidResource Include="Resources\drawable\empty.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\MainLayout.axml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Menu\MainActivityMenu.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\TableLayout.axml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Databaselayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\TableLayoutOld.axml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\TableSelectionButtonLayout.axml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\WorkplaceLayout.axml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\DatabaseActivity.axml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\dimens.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\DatabaseItemLayout.axml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\DatabaseAddLayout.axml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icons_globe.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icons_literature.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icons_notification.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icons_screenshot.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icons_test_tube_filled.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icons_beer.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icons_question_mark.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icons_checkmark.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icons_unchecked_checkbox.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\WorkspaceSchemaEditlayout.axml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icons_pencil_24.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icons_plus_50.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\TableItem.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Menu\DatabaseActivityMenu.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icons_filter_filled_50.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icons_sort_filled_50.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icons_triangle_down_24.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\CellItem.axml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\DatabaseSchemaEditActivity.axml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\TableSchemaEditActivity.axml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\ColumnsEditActivity.axml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\ItemEditActivity.axml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\ColumnEditView.axml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\ColumnEditView_Choice.axml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icons_calendar_48.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icons_menu_32.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icons_picture_32.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icons_bars_30.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icons_text_30.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\ColumnEditTypeChange.axml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\ColumnTypeImageLayout.axml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Menu\SaveOnlyMenu.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\ItemsEditlinearlayout.axml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icons_menu_outline_80.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\icons_filter_outline_50.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+    <Content Include="Resources\drawable\vertical_divider.axml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </Content>
+    <AndroidResource Include="Resources\layout\SortPopup.axml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\FilterPopup.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SortItem.axml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\FilterItem.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	<RelativeLayout
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/relativeLayout1"
+		android:background="@color/workspaceHeaderColor"
+		android:paddingBottom="@dimen/workplace_minimum_padding"
+		android:paddingLeft="@dimen/workplace_minimum_diastance"
+		android:paddingTop="@dimen/workplace_minimum_padding">
+		<TextView
+			android:text="Text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:id="@+id/WorkspaceName"
+			android:layout_centerVertical="true"
+			android:textAllCaps="true" />
+		<ImageButton
+			android:src="@drawable/icons_pencil_24"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/editButton"
+			android:layout_alignParentRight="true"
+			android:background="#00000000"
+			android:layout_marginRight="20px"
+			android:scaleType="fitXY"
+			android:layout_centerVertical="true" />
+	</RelativeLayout>
+	<LinearLayout
+		android:orientation="vertical"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/workspaceDatabases">
+		<RelativeLayout
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/relativeLayoutNewElement"
+			android:paddingBottom="@dimen/workplace_minimum_diastance"
+			android:paddingStart="@dimen/workplace_minimum_diastance"
+			android:paddingTop="@dimen/workplace_minimum_diastance"
+			android:layout_marginTop="@dimen/workplace_headerItems_margin">
+			<ImageView
+				android:src="@drawable/icons_plus_50"
+				android:layout_width="@dimen/workplace_image_size"
+				android:layout_height="@dimen/workplace_image_size"
+				android:id="@+id/imageViewNewElement"
+				android:layout_centerVertical="true"
+				android:cropToPadding="true"
+				android:scaleType="fitXY"
+				android:padding="5px" />
+			<TextView
+				android:text="@string/add_new_database_string"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="center_vertical"
+				android:layout_toRightOf="@id/imageViewNewElement"
+				android:layout_centerVertical="true"
+				android:layout_marginLeft="@dimen/workplace_minimum_diastance"
+				android:textStyle="bold" />
+		</RelativeLayout>
+	</LinearLayout>
+</LinearLayout>

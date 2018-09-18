@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:foregroundTint="#ffffffff"
+	android:foregroundTintMode="multiply">
+	<android.support.v7.widget.Toolbar
+		android:minWidth="25px"
+		android:minHeight="?android:attr/actionBarSize"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/toolbarMain" />
+	<TextView
+		android:text="@string/enter_database_name_string"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/textView3"
+		android:layout_marginTop="@dimen/workplace_minimum_diastance"
+		android:layout_marginLeft="@dimen/workplace_minimum_diastance"/>
+	<EditText
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/editTextName"
+		android:hint="@string/add_new_database_name_hint_string"
+		android:focusedByDefault="true"
+		android:maxLines="1"
+		android:singleLine="true" />
+	<TextView
+		android:text="Select Image"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/textView1"
+		android:layout_marginTop="@dimen/workplace_minimum_diastance"
+		android:layout_marginLeft="@dimen/workplace_minimum_diastance" />
+	<HorizontalScrollView
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/horizontalScrollView1"
+		android:layout_margin="10px">
+		<LinearLayout
+			android:orientation="horizontal"
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:id="@+id/linearLayoutImagePicker" />
+	</HorizontalScrollView>
+	<TextView
+		android:text="Select color"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/textView2"
+		android:layout_marginTop="@dimen/workplace_minimum_diastance"
+		android:layout_marginLeft="@dimen/workplace_minimum_diastance"/>
+	<LinearLayout
+		android:orientation="horizontal"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/linearlayoutColorPicker"
+		android:layout_margin="10px" />
+	<RelativeLayout
+		android:orientation="vertical"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/relativeLayoutAddEmptyDatabase">
+		<ImageView
+			android:layout_width="@dimen/workplace_image_size"
+			android:layout_height="@dimen/workplace_image_size"
+			android:id="@+id/imageViewElement"
+			android:layout_centerVertical="true"
+			android:scaleType="fitXY"
+			android:layout_marginTop="@dimen/workplace_minimum_diastance"
+			android:layout_marginLeft="@dimen/workplace_minimum_diastance"
+			android:src="@drawable/icons_plus_50"
+			android:padding="5px" />
+		<TextView
+			android:text="@string/add_new_empty_database_string"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical"
+			android:id="@+id/textViewNameElement"
+			android:layout_toRightOf="@id/imageViewElement"
+			android:layout_centerVertical="true"
+			android:textAllCaps="true"
+			android:layout_marginLeft="@dimen/workplace_minimum_diastance" />
+	</RelativeLayout>
+
+</LinearLayout>

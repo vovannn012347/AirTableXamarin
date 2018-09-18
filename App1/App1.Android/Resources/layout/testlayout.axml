@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout	
+<android.support.constraint.ConstraintLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:id="@+id/drawerMenu">
-	<android.support.constraint.ConstraintLayout
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:id="@+id/main_layout">
-	</android.support.constraint.ConstraintLayout>
-
-	<android.support.design.widget.NavigationView
-		android:id="@+id/nav_view"
+	android:minWidth="25px"
+	android:minHeight="25px">
+	<Toolbar
+		android:minHeight="?android:attr/actionBarSize"
+		android:background="?android:attr/colorPrimary"
+		android:minWidth="25px"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_gravity="start"
-        android:fitsSystemWindows="true"/>
+		android:id="@+id/toolbar" />
 
-</android.support.v4.widget.DrawerLayout>
+	<android.support.design.widget.NavigationView
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/TableNavigationView" />
+
+	
+</android.support.constraint.ConstraintLayout>

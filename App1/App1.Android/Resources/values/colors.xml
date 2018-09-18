@@ -4,4 +4,24 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="color_white">#FFFFFF</color>
+  
+    <color name="workspaceHeaderColor">#FFEBEBEB</color>
+  
+    <dimen name="workplace_header_margin">48px</dimen>
+    <dimen name="workplace_element_margin">40px</dimen>
+    <dimen name="workplace_minimum_padding">42px</dimen>
+    <dimen name="workplace_minimum_diastance">50px</dimen>
+    <dimen name="workplace_image_size">110px</dimen>
+    <dimen name="workplace_headerItems_margin">4px</dimen>
+    <dimen name="database_table_controls_margin">30px</dimen>
+    <dimen name="database_table_controls_size">50px</dimen>
+    <dimen name="database_table_controls_max_size">150px</dimen>
+    <dimen name="database_table_item_height">350px</dimen>
+
+    <dimen name="database_item_edit_small_height">90px</dimen>
+  
+    <dimen name="typechange_image_size">250px</dimen>
+
+    <dimen name="dateView_padding">15px</dimen>
 </resources>

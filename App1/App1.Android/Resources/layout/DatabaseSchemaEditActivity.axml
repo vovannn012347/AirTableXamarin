@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	<android.support.v7.widget.Toolbar
+		android:minWidth="25px"
+		android:minHeight="?android:attr/actionBarSize"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/toolbarMain" />
+	<RelativeLayout
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/relativeLayoutName">
+		<TextView
+			android:text="@string/database_name_string"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/textViewNmaeEditLabel"
+			android:layout_margin="20px" />
+		<EditText
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/editTextDatabaseName"
+			android:layout_below="@id/textViewNmaeEditLabel"
+			android:layout_margin="20px"
+			android:maxLines="1"
+			android:singleLine="true" />
+	</RelativeLayout>
+	<RelativeLayout
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/relativeLayout2">
+		<TextView
+			android:text="Select color"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/textView2"
+			android:layout_marginTop="@dimen/workplace_minimum_diastance"
+			android:layout_marginLeft="@dimen/workplace_minimum_diastance"/>
+		<LinearLayout
+			android:orientation="horizontal"
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/linearlayoutColorPicker"
+			android:layout_margin="10px"
+			android:layout_below="@id/textView2" />
+	</RelativeLayout>
+	<RelativeLayout
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/relativeLayout1">
+		<TextView
+			android:text="Select Image"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/textView1"
+			android:layout_marginTop="@dimen/workplace_minimum_diastance"
+			android:layout_marginLeft="@dimen/workplace_minimum_diastance" />
+		<HorizontalScrollView
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/horizontalScrollView1"
+			android:layout_margin="10px"
+			android:layout_below="@id/textView1">
+			<LinearLayout
+				android:orientation="horizontal"
+				android:minWidth="25px"
+				android:minHeight="25px"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:id="@+id/linearLayoutImagePicker" />
+		</HorizontalScrollView>
+	</RelativeLayout>
+	<RelativeLayout
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/relativeLayoutDelete"
+		android:paddingStart="@dimen/workplace_minimum_diastance"
+		android:layout_marginTop="@dimen/workplace_minimum_diastance">
+		<ImageView
+			android:src="@android:drawable/ic_menu_delete"
+			android:layout_width="@dimen/workplace_image_size"
+			android:layout_height="@dimen/workplace_image_size"
+			android:id="@+id/imageViewNewElement"
+			android:layout_centerVertical="true"
+			android:cropToPadding="true"
+			android:scaleType="fitXY"
+			android:padding="5px"
+			android:tint="#ffff0000"/>
+		<TextView
+			android:text="@string/remove_database_string"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical"
+			android:layout_toRightOf="@id/imageViewNewElement"
+			android:layout_centerVertical="true"
+			android:layout_marginLeft="@dimen/workplace_minimum_diastance"
+			android:textStyle="bold"
+			android:textColor="#ffff0505" />
+	</RelativeLayout>
+
+</LinearLayout>
